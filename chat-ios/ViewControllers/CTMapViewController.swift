@@ -2,7 +2,7 @@
 //  CTMapViewController.swift
 //  chat-ios
 //
-//  Created by Katrina Rodriguez on 6/10/16.
+//  Created by Brian Correa on 6/19/16.
 //  Copyright © 2016 Velocity360. All rights reserved.
 //
 
@@ -19,7 +19,7 @@ class CTMapViewController: CTViewController, MKMapViewDelegate, CLLocationManage
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        }
+    }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -27,7 +27,7 @@ class CTMapViewController: CTViewController, MKMapViewDelegate, CLLocationManage
         self.tabBarItem.image = UIImage(named: "globe_icon.png")
     }
     
-
+    
     override func loadView() {
         let frame = UIScreen.mainScreen().bounds
         let view = UIView(frame: frame)
@@ -38,14 +38,14 @@ class CTMapViewController: CTViewController, MKMapViewDelegate, CLLocationManage
         
         self.view = view
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.locationManager = CLLocationManager()
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
-
+        
         // Do any additional setup after loading the view.
     }
     
@@ -112,10 +112,10 @@ class CTMapViewController: CTViewController, MKMapViewDelegate, CLLocationManage
         pin.canShowCallout = true
         return pin
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
 }

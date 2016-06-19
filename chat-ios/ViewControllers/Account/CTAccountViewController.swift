@@ -2,7 +2,7 @@
 //  CTAccountViewController.swift
 //  chat-ios
 //
-//  Created by Katrina Rodriguez on 6/10/16.
+//  Created by Brian Correa on 6/19/16.
 //  Copyright © 2016 Velocity360. All rights reserved.
 //
 
@@ -26,7 +26,7 @@ class CTAccountViewController: CTViewController {
         let frame = UIScreen.mainScreen().bounds
         let view = UIView(frame: frame)
         view.backgroundColor = .blueColor()
-    
+        
         let padding = CGFloat(20)
         let width = frame.size.width-2*padding
         let height = CGFloat(44)
@@ -53,10 +53,10 @@ class CTAccountViewController: CTViewController {
         }
         self.view = view
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     
@@ -64,17 +64,17 @@ class CTAccountViewController: CTViewController {
     func buttonTapped(btn: UIButton){
         let buttonTitle = btn.titleLabel?.text?.lowercaseString
         print("buttonTapped: \(buttonTitle!)")
-    
+        
         if (buttonTitle == "sign up"){
             let registerVc = CTRegisterViewController()
             self.navigationController?.pushViewController(registerVc, animated: true)
-    }
-    
+        }
+        
         if (buttonTitle == "login"){
             return
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -2,7 +2,7 @@
 //  CTPlace.swift
 //  chat-ios
 //
-//  Created by Katrina Rodriguez on 6/15/16.
+//  Created by Brian Correa on 6/19/16.
 //  Copyright © 2016 Velocity360. All rights reserved.
 //
 
@@ -19,7 +19,7 @@ class CTPlace: NSObject, MKAnnotation {
     var lat: Double!
     var lng: Double!
     
-     func populate(placeInfo: Dictionary<String, AnyObject>){
+    func populate(placeInfo: Dictionary<String, AnyObject>){
         
         let keys = ["name", "city", "state", "address", "zip"]
         for key in keys {
@@ -46,5 +46,5 @@ class CTPlace: NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D {
         return CLLocationCoordinate2DMake(self.lat, self.lng)
     }
-
+    
 }

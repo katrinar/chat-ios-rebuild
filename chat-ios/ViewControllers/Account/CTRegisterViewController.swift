@@ -2,13 +2,13 @@
 //  CTRegisterViewController.swift
 //  chat-ios
 //
-//  Created by Katrina Rodriguez on 6/10/16.
+//  Created by Brian Correa on 6/19/16.
 //  Copyright © 2016 Velocity360. All rights reserved.
 //
 
 import UIKit
 
-class CTRegisterViewController: CTViewController {
+class CTRegisterViewController: CTViewController, UITextFieldDelegate {
     
     var textFields = Array<UITextField>()
     
@@ -27,6 +27,7 @@ class CTRegisterViewController: CTViewController {
         for fieldName in fieldNames {
             
             let field = UITextField(frame: CGRect(x: padding, y: y, width: width, height: height))
+            field.delegate = self
             field.placeholder = fieldName
             field.font = font
             field.autocorrectionType = .No
@@ -43,16 +44,56 @@ class CTRegisterViewController: CTViewController {
         
         self.view = view
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
-
+    
+    // MARK: - TextFieldDelegate
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        let index = self.textFields.indexOf(textField)!
+        print("textFieldShouldReturn: \(index)")
+        
+        if(index == self.textFields.count-1){ //Password Field, register
+            print("Sign Up: ")
+            
+            var missingValue = ""
+            var profileInfo = Dictionary<String, AnyObject>()
+            for textField in self.textFields{
+                if(textField.text?.characters.count == 0){
+                    missingValue = textField.placeholder!
+                    break
+                }
+                
+                profileInfo[textField.placeholder!.lowercaseString] = textField.text!
+            }
+            
+            // Incomplete:
+            if(missingValue.characters.count > 0){
+                print("MISSING VALUE")
+                let msg = "Your forgot the missing "+missingValue
+                let alert = UIAlertController(title: "Missing Value",
+                                              message: msg,
+                                              preferredStyle: .Alert)
+                
+                alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+                return true
+            }
+        }
+        
+        let nextField = self.textFields[index+1]
+        nextField.becomeFirstResponder()
+        
+        return true
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
 }

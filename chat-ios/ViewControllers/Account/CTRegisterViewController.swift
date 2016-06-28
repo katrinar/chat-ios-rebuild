@@ -15,28 +15,23 @@ class CTRegisterViewController: CTViewController, UITextFieldDelegate {
     override func loadView() {
         let frame = UIScreen.mainScreen().bounds
         let view = UIView(frame: frame)
-        view.backgroundColor = UIColor.redColor()
+        view.backgroundColor = UIColor.grayColor()
         
-        let padding = CGFloat(20)
+        let padding = CGFloat(Constants.padding)
         let width = frame.size.width-2*padding
         let height = CGFloat(32)
-        var y = CGFloat(120)
-        let font = UIFont(name: "Heiti SC", size: 18)
+        var y = CGFloat(Constants.origin_y)
         
         let fieldNames = ["Username", "Email", "Password"]
+        
         for fieldName in fieldNames {
-            
-            let field = UITextField(frame: CGRect(x: padding, y: y, width: width, height: height))
+            let field = CTTextField(frame: CGRect(x: padding, y: y, width: width, height: height))
             field.delegate = self
             field.placeholder = fieldName
-            field.font = font
-            field.autocorrectionType = .No
             let isPassword = (fieldName == "Password")
-            field.secureTextEntry = (isPassword)
-            field.returnKeyType = (isPassword) ? .Join : .Next
-            let line = UIView(frame: CGRect(x: 0, y: height-1, width: width, height: 1))
-            line.backgroundColor = .whiteColor()
-            field.addSubview(line)
+            field.secureTextEntry = isPassword
+            field.returnKeyType = isPassword ? .Join : .Next
+            
             view.addSubview(field)
             self.textFields.append(field)
             y += height+padding
@@ -48,11 +43,9 @@ class CTRegisterViewController: CTViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
     }
     
     // MARK: - TextFieldDelegate
-    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         let index = self.textFields.indexOf(textField)!
         print("textFieldShouldReturn: \(index)")
@@ -67,7 +60,6 @@ class CTRegisterViewController: CTViewController, UITextFieldDelegate {
                     missingValue = textField.placeholder!
                     break
                 }
-                
                 profileInfo[textField.placeholder!.lowercaseString] = textField.text!
             }
             
@@ -83,6 +75,28 @@ class CTRegisterViewController: CTViewController, UITextFieldDelegate {
                 self.presentViewController(alert, animated: true, completion: nil)
                 return true
             }
+            
+            print("\(profileInfo)")
+            
+            APIManager.postRequest("/api/profile",
+                                   params: profileInfo,
+                                   completion: { error, response in
+                                    
+                                    print("\(response)")
+                                    
+                                    if let result = response!["result"] as?
+                                        Dictionary<String, AnyObject>{
+                                        
+                                        dispatch_async(dispatch_get_main_queue(), {
+                                            self.postLoggedInNotification(result)
+                                            let accountVc = CTAccountViewController()
+                                            self.navigationController?.pushViewController(accountVc, animated: true)
+                                            
+                                        })
+                                    }
+            })
+            
+            return true
         }
         
         let nextField = self.textFields[index+1]
@@ -93,7 +107,7 @@ class CTRegisterViewController: CTViewController, UITextFieldDelegate {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
     
 }

@@ -12,6 +12,8 @@
 		5418D1381D11EDE20064150D /* globe_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5418D1371D11EDE20064150D /* globe_icon@2x.png */; };
 		5418D13A1D11EF620064150D /* profile_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5418D1391D11EF620064150D /* profile_icon@2x.png */; };
 		9AB842EB0F823917C977963F /* Pods_chat_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED91D5B61F232243D60828B6 /* Pods_chat_ios.framework */; };
+		D37979FE1D19E9A5004BDA9F /* CTButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37979FD1D19E9A5004BDA9F /* CTButton.swift */; };
+		D3797A001D1ADDB3004BDA9F /* CTLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37979FF1D1ADDB3004BDA9F /* CTLoginViewController.swift */; };
 		D38155951D171B2A00642F1E /* CTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38155941D171B2A00642F1E /* CTViewController.swift */; };
 		D38155971D171B9700642F1E /* CTRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38155961D171B9700642F1E /* CTRegisterViewController.swift */; };
 		D38155991D171BBC00642F1E /* CTAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38155981D171BBC00642F1E /* CTAccountViewController.swift */; };
@@ -19,6 +21,8 @@
 		D381559D1D171CD200642F1E /* CTPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381559C1D171CD200642F1E /* CTPlace.swift */; };
 		D381559F1D171CF500642F1E /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381559E1D171CF500642F1E /* APIManager.swift */; };
 		D38155A51D1731BA00642F1E /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38155A41D1731BA00642F1E /* Config.swift */; };
+		D3A572901D18C2110011822F /* CTProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A5728F1D18C2110011822F /* CTProfile.swift */; };
+		D3E666291D2217C100614F91 /* CTTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E666281D2217C100614F91 /* CTTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +34,8 @@
 		5418D1371D11EDE20064150D /* globe_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "globe_icon@2x.png"; sourceTree = "<group>"; };
 		5418D1391D11EF620064150D /* profile_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile_icon@2x.png"; sourceTree = "<group>"; };
 		942CC802F63FFD1B4DA33F26 /* Pods-chat-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chat-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chat-ios/Pods-chat-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		D37979FD1D19E9A5004BDA9F /* CTButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTButton.swift; sourceTree = "<group>"; };
+		D37979FF1D1ADDB3004BDA9F /* CTLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTLoginViewController.swift; sourceTree = "<group>"; };
 		D38155941D171B2A00642F1E /* CTViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTViewController.swift; sourceTree = "<group>"; };
 		D38155961D171B9700642F1E /* CTRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTRegisterViewController.swift; sourceTree = "<group>"; };
 		D38155981D171BBC00642F1E /* CTAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTAccountViewController.swift; sourceTree = "<group>"; };
@@ -37,6 +43,8 @@
 		D381559C1D171CD200642F1E /* CTPlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTPlace.swift; sourceTree = "<group>"; };
 		D381559E1D171CF500642F1E /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		D38155A41D1731BA00642F1E /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		D3A5728F1D18C2110011822F /* CTProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTProfile.swift; sourceTree = "<group>"; };
+		D3E666281D2217C100614F91 /* CTTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTTextField.swift; sourceTree = "<group>"; };
 		ED91D5B61F232243D60828B6 /* Pods_chat_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chat_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -81,14 +89,15 @@
 		54051CB31D0A001200FE7E76 /* chat-ios */ = {
 			isa = PBXGroup;
 			children = (
+				D37979FC1D19E532004BDA9F /* Views */,
 				54051CBB1D0A001200FE7E76 /* Assets.xcassets */,
 				54051CB41D0A001200FE7E76 /* AppDelegate.swift */,
 				D38155A41D1731BA00642F1E /* Config.swift */,
 				D38155941D171B2A00642F1E /* CTViewController.swift */,
 				54051CC01D0A001200FE7E76 /* Info.plist */,
-				5418D13E1D11FD410064150D /* utils */,
-				5418D13B1D11F8B30064150D /* models */,
 				5418D1361D11EDC50064150D /* Images */,
+				5418D13B1D11F8B30064150D /* models */,
+				5418D13E1D11FD410064150D /* utils */,
 				54051CC81D0A4DB900FE7E76 /* ViewControllers */,
 			);
 			path = "chat-ios";
@@ -116,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				D381559C1D171CD200642F1E /* CTPlace.swift */,
+				D3A5728F1D18C2110011822F /* CTProfile.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -133,6 +143,7 @@
 			children = (
 				D38155961D171B9700642F1E /* CTRegisterViewController.swift */,
 				D38155981D171BBC00642F1E /* CTAccountViewController.swift */,
+				D37979FF1D1ADDB3004BDA9F /* CTLoginViewController.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -144,6 +155,15 @@
 				0CE9691AC83731FAD978D91F /* Pods-chat-ios.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		D37979FC1D19E532004BDA9F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D37979FD1D19E9A5004BDA9F /* CTButton.swift */,
+				D3E666281D2217C100614F91 /* CTTextField.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,9 +291,13 @@
 			files = (
 				D381559F1D171CF500642F1E /* APIManager.swift in Sources */,
 				D381559B1D171C2400642F1E /* CTMapViewController.swift in Sources */,
+				D3A572901D18C2110011822F /* CTProfile.swift in Sources */,
 				54051CB51D0A001200FE7E76 /* AppDelegate.swift in Sources */,
 				D38155991D171BBC00642F1E /* CTAccountViewController.swift in Sources */,
+				D3797A001D1ADDB3004BDA9F /* CTLoginViewController.swift in Sources */,
 				D381559D1D171CD200642F1E /* CTPlace.swift in Sources */,
+				D37979FE1D19E9A5004BDA9F /* CTButton.swift in Sources */,
+				D3E666291D2217C100614F91 /* CTTextField.swift in Sources */,
 				D38155A51D1731BA00642F1E /* Config.swift in Sources */,
 				D38155971D171B9700642F1E /* CTRegisterViewController.swift in Sources */,
 				D38155951D171B2A00642F1E /* CTViewController.swift in Sources */,

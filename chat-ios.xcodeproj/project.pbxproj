@@ -22,6 +22,7 @@
 		D381559F1D171CF500642F1E /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381559E1D171CF500642F1E /* APIManager.swift */; };
 		D38155A51D1731BA00642F1E /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38155A41D1731BA00642F1E /* Config.swift */; };
 		D3A572901D18C2110011822F /* CTProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A5728F1D18C2110011822F /* CTProfile.swift */; };
+		D3D7E5281D24E3EC00DD4DDD /* CTCreatePlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D7E5271D24E3EB00DD4DDD /* CTCreatePlaceViewController.swift */; };
 		D3E666291D2217C100614F91 /* CTTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E666281D2217C100614F91 /* CTTextField.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +45,7 @@
 		D381559E1D171CF500642F1E /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		D38155A41D1731BA00642F1E /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D3A5728F1D18C2110011822F /* CTProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTProfile.swift; sourceTree = "<group>"; };
+		D3D7E5271D24E3EB00DD4DDD /* CTCreatePlaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTCreatePlaceViewController.swift; sourceTree = "<group>"; };
 		D3E666281D2217C100614F91 /* CTTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTTextField.swift; sourceTree = "<group>"; };
 		ED91D5B61F232243D60828B6 /* Pods_chat_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chat_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -144,6 +146,7 @@
 				D38155961D171B9700642F1E /* CTRegisterViewController.swift */,
 				D38155981D171BBC00642F1E /* CTAccountViewController.swift */,
 				D37979FF1D1ADDB3004BDA9F /* CTLoginViewController.swift */,
+				D3D7E5271D24E3EB00DD4DDD /* CTCreatePlaceViewController.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				D3E666291D2217C100614F91 /* CTTextField.swift in Sources */,
 				D38155A51D1731BA00642F1E /* Config.swift in Sources */,
 				D38155971D171B9700642F1E /* CTRegisterViewController.swift in Sources */,
+				D3D7E5281D24E3EC00DD4DDD /* CTCreatePlaceViewController.swift in Sources */,
 				D38155951D171B2A00642F1E /* CTViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

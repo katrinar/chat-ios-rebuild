@@ -16,6 +16,7 @@ class CTMapViewController: CTViewController, MKMapViewDelegate, CLLocationManage
     var mapView: MKMapView!
     var locationManager: CLLocationManager!
     var places = Array<CTPlace>()
+    var btnCreatePlace: UIButton!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -27,14 +28,27 @@ class CTMapViewController: CTViewController, MKMapViewDelegate, CLLocationManage
         self.tabBarItem.image = UIImage(named: "globe_icon.png")
     }
     
-    
     override func loadView() {
         let frame = UIScreen.mainScreen().bounds
         let view = UIView(frame: frame)
         view.backgroundColor = UIColor.yellowColor()
         
         self.mapView = MKMapView(frame: frame)
+        self.mapView.delegate = self
         view.addSubview(mapView)
+        
+        let padding = CGFloat(Constants.padding)
+        let height = CGFloat(44)
+        
+        self.btnCreatePlace = CTButton(frame: CGRect(x: padding, y: -height, width: frame.size.width-2*padding, height: height))
+        self.btnCreatePlace.setTitle("Create Place", forState: .Normal)
+        self.btnCreatePlace.addTarget(
+            self,
+            action: #selector(CTMapViewController.createPlace),
+            forControlEvents: .TouchUpInside
+        )
+        self.btnCreatePlace.alpha = 0 //initially hidden
+        view.addSubview(self.btnCreatePlace)
         
         self.view = view
     }
@@ -46,10 +60,61 @@ class CTMapViewController: CTViewController, MKMapViewDelegate, CLLocationManage
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
         
-        // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(animated: Bool){
+        super.viewWillAppear(animated)
+        
+        if(CTMapViewController.currentUser.id == nil){
+            return
+        }
+        
+        if (self.btnCreatePlace.alpha == 1){
+            return
+        }
+        
+        self.showCreateButton()
+        
+    }
     
+    override func userLoggedIn(notification: NSNotification){
+        super.userLoggedIn(notification)
+        
+        if(CTMapViewController.currentUser.id == nil) {
+            return
+        }
+        
+        print("CTMapViewController: userLoggedIn")
+        
+        if(self.view.window == nil){ //not on screen, ignore
+            return
+        }
+        
+        self.showCreateButton()
+    }
+    
+    func showCreateButton(){
+        
+        self.btnCreatePlace.alpha = 1
+        UIView.animateWithDuration(1.25,
+                                   delay: 0,
+                                   usingSpringWithDamping: 0.5,
+                                   initialSpringVelocity: 0,
+                                   options: UIViewAnimationOptions.CurveEaseInOut,
+                                   animations: {
+                                    var frame = self.btnCreatePlace.frame
+                                    frame.origin.y = 20
+                                    self.btnCreatePlace.frame = frame
+            }, completion: nil)
+    }
+    
+    func createPlace(){
+        print("CreatePlace: ")
+        
+        let createPlaceVc = CTCreatePlaceViewController()
+        self.presentViewController(createPlaceVc, animated: true, completion: nil)
+        
+    }
     
     //MARK: - LocationManagerDelegate
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus){

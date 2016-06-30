@@ -91,7 +91,6 @@ class CTRegisterViewController: CTViewController, UITextFieldDelegate {
                                             self.postLoggedInNotification(result)
                                             let accountVc = CTAccountViewController()
                                             self.navigationController?.pushViewController(accountVc, animated: true)
-                                            
                                         })
                                     }
             })

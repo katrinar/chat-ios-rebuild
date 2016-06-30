@@ -45,6 +45,85 @@ class CTLoginViewController: CTViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
     }
+    
+    // MARK: - TextFieldDelegate
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        let index = self.textFields.indexOf(textField)!
+        print("textFieldShouldReturn: \(index)")
+        
+        if(index == self.textFields.count-1){ //Password Field, register
+            print("Login: ")
+            
+            var missingValue = ""
+            var profileInfo = Dictionary<String, AnyObject>()
+            for textField in self.textFields{
+                if(textField.text?.characters.count == 0){
+                    missingValue = textField.placeholder!
+                    break
+                }
+                profileInfo[textField.placeholder!.lowercaseString] = textField.text!
+            }
+            
+            // Incomplete:
+            if(missingValue.characters.count > 0){
+                print("MISSING VALUE")
+                let msg = "Your forgot the missing "+missingValue
+                let alert = UIAlertController(title: "Missing Value",
+                                              message: msg,
+                                              preferredStyle: .Alert)
+                
+                alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+                return true
+            }
+            
+            print("\(profileInfo)")
+            
+            APIManager.postRequest("/account/login",
+                                   params: profileInfo,
+                                   completion: { error, response in
+                                    
+                                    if(error != nil){
+                                        let errorObj = error?.userInfo
+                                        let errorMsg = errorObj!["message"] as! String
+                                        print("ERROR: \(errorMsg)")
+                                        
+                                        dispatch_async(dispatch_get_main_queue(), {
+                                            let alert = UIAlertController(
+                                                title: "Error",
+                                                message: errorMsg,
+                                                preferredStyle: .Alert)
+                                            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                                            self.presentViewController(alert, animated: true, completion: nil)
+                                        })
+                                        
+                                        return
+                                    }
+                                    
+                                    print("\(response)")
+                                    
+                                    if let result = response!["currentUser"] as?
+                                        Dictionary<String, AnyObject>{
+                                        
+                                        CTViewController.currentUser.populate(result)
+                                        
+                                        dispatch_async(dispatch_get_main_queue(), {
+                                            self.postLoggedInNotification(result)
+                                            let accountVc = CTAccountViewController()
+                                            self.navigationController?.pushViewController(accountVc, animated: true)
+                                        })
+                                    }
+            })
+            
+            return true
+        }
+        
+        let nextField = self.textFields[index+1]
+        nextField.becomeFirstResponder()
+        
+        return true
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

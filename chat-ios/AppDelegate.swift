@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,17 +15,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        FIRApp.configure()
         
         let frame = UIScreen.mainScreen().bounds
         self.window = UIWindow(frame: frame)
         
         let mapVc = CTMapViewController()
+        let mapNavCtr = UINavigationController(rootViewController: mapVc)
+        mapNavCtr.navigationBar.barTintColor = UIColor(red: 0.5, green: 0, blue: 0.5, alpha: 1)
+        mapNavCtr.navigationBar.tintColor = .whiteColor()
         
         let accountVc = CTAccountViewController()
         let accountNavCtr = UINavigationController(rootViewController: accountVc)
+        accountNavCtr.navigationBar.barTintColor = UIColor(red: 0, green: 0.5, blue: 0.5, alpha: 1)
+        accountNavCtr.navigationBar.tintColor = .whiteColor()
         
         let tabCtr = UITabBarController()
-        tabCtr.viewControllers = [mapVc, accountNavCtr]
+        tabCtr.viewControllers = [mapNavCtr, accountNavCtr]
         
         self.window?.rootViewController = tabCtr
         self.window?.makeKeyAndVisible()

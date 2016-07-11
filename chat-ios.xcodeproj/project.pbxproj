@@ -12,6 +12,9 @@
 		5418D1381D11EDE20064150D /* globe_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5418D1371D11EDE20064150D /* globe_icon@2x.png */; };
 		5418D13A1D11EF620064150D /* profile_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5418D1391D11EF620064150D /* profile_icon@2x.png */; };
 		9AB842EB0F823917C977963F /* Pods_chat_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED91D5B61F232243D60828B6 /* Pods_chat_ios.framework */; };
+		D3497AC81D32FF1C00DB49D9 /* CTChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3497AC71D32FF1C00DB49D9 /* CTChatTableViewCell.swift */; };
+		D3497ACA1D330FC200DB49D9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3497AC91D330FC200DB49D9 /* GoogleService-Info.plist */; };
+		D34CA98D1D30188F000A4353 /* CTChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34CA98C1D30188F000A4353 /* CTChatViewController.swift */; };
 		D37979FE1D19E9A5004BDA9F /* CTButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37979FD1D19E9A5004BDA9F /* CTButton.swift */; };
 		D3797A001D1ADDB3004BDA9F /* CTLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37979FF1D1ADDB3004BDA9F /* CTLoginViewController.swift */; };
 		D38155951D171B2A00642F1E /* CTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38155941D171B2A00642F1E /* CTViewController.swift */; };
@@ -35,6 +38,9 @@
 		5418D1371D11EDE20064150D /* globe_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "globe_icon@2x.png"; sourceTree = "<group>"; };
 		5418D1391D11EF620064150D /* profile_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile_icon@2x.png"; sourceTree = "<group>"; };
 		942CC802F63FFD1B4DA33F26 /* Pods-chat-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chat-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chat-ios/Pods-chat-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		D3497AC71D32FF1C00DB49D9 /* CTChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTChatTableViewCell.swift; sourceTree = "<group>"; };
+		D3497AC91D330FC200DB49D9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D34CA98C1D30188F000A4353 /* CTChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTChatViewController.swift; sourceTree = "<group>"; };
 		D37979FD1D19E9A5004BDA9F /* CTButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTButton.swift; sourceTree = "<group>"; };
 		D37979FF1D1ADDB3004BDA9F /* CTLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTLoginViewController.swift; sourceTree = "<group>"; };
 		D38155941D171B2A00642F1E /* CTViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +103,7 @@
 				D38155A41D1731BA00642F1E /* Config.swift */,
 				D38155941D171B2A00642F1E /* CTViewController.swift */,
 				54051CC01D0A001200FE7E76 /* Info.plist */,
+				D3497AC91D330FC200DB49D9 /* GoogleService-Info.plist */,
 				5418D1361D11EDC50064150D /* Images */,
 				5418D13B1D11F8B30064150D /* models */,
 				5418D13E1D11FD410064150D /* utils */,
@@ -110,6 +117,7 @@
 			children = (
 				54E3915B1D0B575400020376 /* Account */,
 				D381559A1D171C2400642F1E /* CTMapViewController.swift */,
+				D34CA98C1D30188F000A4353 /* CTChatViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -165,6 +173,7 @@
 			children = (
 				D37979FD1D19E9A5004BDA9F /* CTButton.swift */,
 				D3E666281D2217C100614F91 /* CTTextField.swift */,
+				D3497AC71D32FF1C00DB49D9 /* CTChatTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -232,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5418D1381D11EDE20064150D /* globe_icon@2x.png in Resources */,
+				D3497ACA1D330FC200DB49D9 /* GoogleService-Info.plist in Resources */,
 				5418D13A1D11EF620064150D /* profile_icon@2x.png in Resources */,
 				54051CBC1D0A001200FE7E76 /* Assets.xcassets in Resources */,
 			);
@@ -297,6 +307,7 @@
 				D3A572901D18C2110011822F /* CTProfile.swift in Sources */,
 				54051CB51D0A001200FE7E76 /* AppDelegate.swift in Sources */,
 				D38155991D171BBC00642F1E /* CTAccountViewController.swift in Sources */,
+				D34CA98D1D30188F000A4353 /* CTChatViewController.swift in Sources */,
 				D3797A001D1ADDB3004BDA9F /* CTLoginViewController.swift in Sources */,
 				D381559D1D171CD200642F1E /* CTPlace.swift in Sources */,
 				D37979FE1D19E9A5004BDA9F /* CTButton.swift in Sources */,
@@ -304,6 +315,7 @@
 				D38155A51D1731BA00642F1E /* Config.swift in Sources */,
 				D38155971D171B9700642F1E /* CTRegisterViewController.swift in Sources */,
 				D3D7E5281D24E3EC00DD4DDD /* CTCreatePlaceViewController.swift in Sources */,
+				D3497AC81D32FF1C00DB49D9 /* CTChatTableViewCell.swift in Sources */,
 				D38155951D171B2A00642F1E /* CTViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

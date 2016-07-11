@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>1070767533928-6g8crja7n7k11o644tknpv76p4aqj8qp.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1070767533928-6g8crja7n7k11o644tknpv76p4aqj8qp</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDPUIJQQn1ib_W7AY37Ni-Uyi-DyYZAby4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1070767533928</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.velocity360.chat-ios</string>
+	<key>PROJECT_ID</key>
+	<string>skribble-rebuild</string>
+	<key>STORAGE_BUCKET</key>
+	<string>skribble-rebuild.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1070767533928:ios:de96d4720025bf61</string>
+	<key>DATABASE_URL</key>
+	<string>https://skribble-rebuild.firebaseio.com</string>
+</dict>
+</plist>

@@ -17,15 +17,26 @@ class CTMapViewController: CTViewController, MKMapViewDelegate, CLLocationManage
     var locationManager: CLLocationManager!
     var places = Array<CTPlace>()
     var btnCreatePlace: UIButton!
+    var currentLocation: CLLocation?
+    var selectedPlace: CTPlace?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?){
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        self.title = "Map"
+        
+        edgesForExtendedLayout = .None
+        self.title = ""
+        self.tabBarItem.title = "Map"
         self.tabBarItem.image = UIImage(named: "globe_icon.png")
+        
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.addObserver(self,
+                                       selector: #selector(CTMapViewController.placeCreated(_:)),
+                                       name: Constants.kPlaceCreatedNotification,
+                                       object: nil)
     }
     
     override func loadView() {
@@ -59,7 +70,6 @@ class CTMapViewController: CTViewController, MKMapViewDelegate, CLLocationManage
         self.locationManager = CLLocationManager()
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
-        
     }
     
     override func viewWillAppear(animated: Bool){
@@ -75,6 +85,27 @@ class CTMapViewController: CTViewController, MKMapViewDelegate, CLLocationManage
         
         self.showCreateButton()
         
+    }
+    
+    func placeCreated(notification: NSNotification){
+        if let place = notification.userInfo!["place"] as? CTPlace {
+            dispatch_async(dispatch_get_main_queue(), {
+                self.mapView.addAnnotation(place)
+                
+                let ctr = CLLocationCoordinate2DMake(place.lat, place.lng)
+                
+                // check distance
+                let coord = CLLocation(latitude: place.lat, longitude: place.lng)
+                let mapCenter = CLLocation(latitude: self.mapView.centerCoordinate.latitude, longitude: self.mapView.centerCoordinate.longitude)
+                
+                let delta = mapCenter.distanceFromLocation(coord)
+                if (delta < 750){ //don't move map, not far away enoug yet
+                    return
+                }
+                
+                self.mapView.setCenterCoordinate(ctr, animated: true)
+            })
+        }
     }
     
     override func userLoggedIn(notification: NSNotification){
@@ -112,8 +143,33 @@ class CTMapViewController: CTViewController, MKMapViewDelegate, CLLocationManage
         print("CreatePlace: ")
         
         let createPlaceVc = CTCreatePlaceViewController()
-        self.presentViewController(createPlaceVc, animated: true, completion: nil)
+        self.presentViewController(createPlaceVc, animated: true, completion: nil)   
+    }
+    
+    func searchPlaces(lat: CLLocationDegrees, lng: CLLocationDegrees){
         
+        var params = Dictionary<String, AnyObject>()
+        params["lat"] = lat
+        params["lng"] = lng
+        
+        APIManager.getRequest("/api/place", params: params, completion: { response in
+            print("\(response)")
+            
+            if let results = response["results"] as? Array<Dictionary<String, AnyObject>>{
+                self.mapView.removeAnnotations(self.places)
+                self.places.removeAll()
+                for placeInfo in results {
+                    let place = CTPlace()
+                    place.populate(placeInfo)
+                    self.places.append(place)
+                }
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.mapView.addAnnotations(self.places)
+                })
+            }
+            
+        })
     }
     
     //MARK: - LocationManagerDelegate
@@ -126,44 +182,20 @@ class CTMapViewController: CTViewController, MKMapViewDelegate, CLLocationManage
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
         print("didUpdateLocations: \(locations)")
         self.locationManager.stopUpdatingLocation()
-        let currentLocation = locations[0]
+        self.currentLocation = locations[0]
         
-        self.mapView.centerCoordinate = CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude)
+        self.mapView.centerCoordinate = CLLocationCoordinate2DMake(self.currentLocation!.coordinate.latitude, self.currentLocation!.coordinate.longitude)
         
         let dist = CLLocationDistance(500)
         let region = MKCoordinateRegionMakeWithDistance(self.mapView.centerCoordinate, dist, dist)
         self.mapView.setRegion(region, animated: true)
         
         //MAKE API REQUEST TO OUR BACKEND:
-        
-        let url = "http://localhost:3000/api/place"
-        
-        let params = [
-            "lat": currentLocation.coordinate.latitude,
-            "lng": currentLocation.coordinate.longitude
-        ]
-        
-        
-        APIManager.getRequest(url, params: params, completion: { response in
-            print("\(response)")
-            
-            if let results = response["results"] as? Array<Dictionary<String, AnyObject>>{
-                for placeInfo in results {
-                    let place = CTPlace()
-                    place.populate(placeInfo)
-                    self.places.append(place)
-                    
-                }
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.mapView.addAnnotations(self.places)
-                })
-            }
-            
-        })
-        
+        self.searchPlaces(self.currentLocation!.coordinate.latitude, lng: self.currentLocation!.coordinate.longitude)
     }
     
     //MARK: - MapViewDelegate
+    
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         let pinId = "pinId"
         if let pin = mapView.dequeueReusableAnnotationViewWithIdentifier(pinId) as? MKPinAnnotationView{
@@ -175,12 +207,47 @@ class CTMapViewController: CTViewController, MKMapViewDelegate, CLLocationManage
         let pin = MKPinAnnotationView(annotation: annotation, reuseIdentifier: pinId)
         pin.animatesDrop = true
         pin.canShowCallout = true
+        pin.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+        
         return pin
+    }
+    
+    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        print("regionDidChangeAnimated: \(mapView.centerCoordinate.latitude), \(mapView.centerCoordinate.longitude)")
+        
+        // First time, always run:
+        if(self.currentLocation == nil){
+            self.searchPlaces(mapView.centerCoordinate.latitude, lng: mapView.centerCoordinate.longitude)
+            return
+        }
+        
+        let mapCenter = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
+        
+        let delta = mapCenter.distanceFromLocation(self.currentLocation!)
+        
+        if(delta < 750){ //not far enough, ignore
+            return
+        }
+        
+        print("DELTA == \(delta)")
+        self.currentLocation = mapCenter
+        self.searchPlaces(mapView.centerCoordinate.latitude, lng: mapView.centerCoordinate.longitude)
+    }
+    
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        print("calloutAccessoryControlTapped")
+        self.selectedPlace = view.annotation as? CTPlace
+
+        let chatVc = CTChatViewController()
+        chatVc.place = self.selectedPlace
+        self.navigationController?.pushViewController(chatVc, animated: true)
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
     
 }

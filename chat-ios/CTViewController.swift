@@ -49,6 +49,10 @@ class CTViewController: UIViewController {
         
     }
     
+    func exit(){
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     

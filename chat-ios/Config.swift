@@ -14,6 +14,7 @@ struct Constants {
     
     //Notification:
     static let kUserLoggedInNotification = "UserLoggedInNotification"
+    static let kPlaceCreatedNotification = "kPlaceCreatedNotification"
     
     //UI Attributes
     static let padding = 20

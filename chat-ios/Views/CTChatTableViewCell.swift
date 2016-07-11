@@ -9,6 +9,8 @@
 import UIKit
 
 class CTChatTableViewCell: UITableViewCell {
+    
+    static var cellId = "cellId"
 
     override func awakeFromNib() {
         super.awakeFromNib()

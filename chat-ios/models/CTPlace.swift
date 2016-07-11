@@ -11,6 +11,7 @@ import MapKit
 
 class CTPlace: NSObject, MKAnnotation {
     
+    var id: String!
     var name: String!
     var city: String!
     var state: String!
@@ -21,7 +22,7 @@ class CTPlace: NSObject, MKAnnotation {
     
     func populate(placeInfo: Dictionary<String, AnyObject>){
         
-        let keys = ["name", "city", "state", "address", "zip"]
+        let keys = ["name", "city", "state", "address", "zip", "id"]
         for key in keys {
             let value = placeInfo[key]
             self.setValue(value, forKey: key)

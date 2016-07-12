@@ -216,9 +216,14 @@ class CTChatViewController: CTViewController, UITableViewDelegate, UITableViewDa
         
         let post = self.posts[indexPath.row]
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(CTChatTableViewCell.cellId, forIndexPath: indexPath)
-        cell.textLabel?.text = post.message
+        let cell = tableView.dequeueReusableCellWithIdentifier(CTChatTableViewCell.cellId, forIndexPath: indexPath) as! CTChatTableViewCell
+        cell.messageLabel.text = post.message
+        cell.dateLabel.text = post.formattedDate
         return cell
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return CTChatTableViewCell.defaultHeight
     }
 
     override func didReceiveMemoryWarning() {

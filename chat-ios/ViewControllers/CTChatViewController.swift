@@ -34,6 +34,22 @@ class CTChatViewController: CTViewController, UITableViewDelegate, UITableViewDa
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
         self.hidesBottomBarWhenPushed = true
+        
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(CTChatViewController.shiftKeyboardUp(_:)),
+            name: UIKeyboardWillShowNotification,
+            object: nil
+        )
+        
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(CTChatViewController.shiftKeyboardDown(_:)),
+            name: UIKeyboardWillHideNotification,
+            object: nil
+        )
     }
     
     override func loadView() {
@@ -152,6 +168,36 @@ class CTChatViewController: CTViewController, UITableViewDelegate, UITableViewDa
         
         self.messageField.text = nil
         
+    }
+    
+    //MARK: - KeyboardNotification
+    
+    func shiftKeyboardUp(notification: NSNotification){
+        print("shiftKeyboardUp")
+        if let keyboardFrame = notification.userInfo![UIKeyboardFrameEndUserInfoKey]?.CGRectValue() {
+            
+            print("\(notification.userInfo!)")
+            
+            var frame = self.bottomView.frame
+            frame.origin.y = keyboardFrame.origin.y-frame.size.height
+            self.bottomView.frame = frame
+            
+            frame = self.chatTable.frame
+            frame.origin.y = -keyboardFrame.size.height
+            self.chatTable.frame = frame    
+        }
+    }
+    
+    func shiftKeyboardDown(notificaion: NSNotification){
+        print("shiftKeyboardDown")
+        
+        var frame = self.bottomView.frame
+        frame.origin.y = self.view.frame.size.height-frame.size.height
+        self.bottomView.frame = frame
+        
+        frame = self.chatTable.frame
+        frame.origin.y = 0
+        self.chatTable.frame = frame
     }
     
     //MARK: - TextField Delegate

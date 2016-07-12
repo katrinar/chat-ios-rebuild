@@ -10,7 +10,8 @@ import Foundation
 
 struct Constants {
     
-    static let baseUrl = "http:localhost:3000"
+//    static let baseUrl = "http:localhost:3000"
+    static let baseUrl = "http://skribble-rebuild.herokuapp.com"
     
     //Notification:
     static let kUserLoggedInNotification = "UserLoggedInNotification"

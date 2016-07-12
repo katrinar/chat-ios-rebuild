@@ -60,6 +60,9 @@ class CTChatViewController: CTViewController, UITableViewDelegate, UITableViewDa
         self.chatTable = UITableView(frame: frame, style: .Plain)
         self.chatTable.dataSource = self
         self.chatTable.delegate = self
+        self.chatTable.contentInset = UIEdgeInsetsMake(0, 0, 44, 0)
+        self.chatTable.separatorStyle = .None
+        self.chatTable.showsVerticalScrollIndicator = false
         self.chatTable.registerClass(CTChatTableViewCell.classForCoder(), forCellReuseIdentifier: "cellId")
         view.addSubview(self.chatTable)
         
@@ -104,15 +107,19 @@ class CTChatViewController: CTViewController, UITableViewDelegate, UITableViewDa
     
     override func viewWillAppear(animated: Bool) {
         print("viewWillAppear:")
+        print("Self Ref: \(self._refHandle)")
+        
+        if (self._refHandle != nil){
+            return
+        }
         
         //Listen for new messages in the FB DB
-        self._refHandle = self.firebase.child(self.place.id).observeEventType(.Value, withBlock: { (snapshot) -> Void in
+        self._refHandle = self.firebase.child(self.place.id).queryLimitedToLast(25).observeEventType(.Value, withBlock: { (snapshot) -> Void in
             
             if let payload = snapshot.value as? Dictionary<String, AnyObject> {
                 
                 for key in payload.keys {
                     let postInfo = payload[key] as! Dictionary<String, AnyObject>
-//                    print("POST == \(post)")
                     if(self.keys.contains(key)){
                         continue
                     }
@@ -122,11 +129,22 @@ class CTChatViewController: CTViewController, UITableViewDelegate, UITableViewDa
                     post.id = key
                     post.populate(postInfo)
                     self.posts.append(post)
-                    
                 }
-                    
+                
+                print("\(self.posts.count) POSTS")
+                self.posts.sortInPlace{
+                    $0.timestamp.compare($1.timestamp) == .OrderedAscending
+                }
+                
                     dispatch_async(dispatch_get_main_queue(), {
                         self.chatTable.reloadData()
+                        
+                        let lastIndexPath = NSIndexPath(forItem: self.posts.count-1, inSection: 0)
+                        self.chatTable.scrollToRowAtIndexPath(
+                            lastIndexPath,
+                            atScrollPosition: .Top,
+                            animated: true
+                        )
                     })
             }
         })
@@ -224,6 +242,10 @@ class CTChatViewController: CTViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return CTChatTableViewCell.defaultHeight
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        self.messageField.resignFirstResponder()
     }
 
     override func didReceiveMemoryWarning() {

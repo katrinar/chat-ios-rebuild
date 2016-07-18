@@ -15,6 +15,7 @@ class CTChatTableViewCell: UITableViewCell {
     static var padding = CGFloat(12)
     var messageLabel: UILabel!
     var dateLabel: UILabel!
+    var thumbnail: UIImageView!
     
     required init?(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)
@@ -29,6 +30,10 @@ class CTChatTableViewCell: UITableViewCell {
         var y = CGFloat(12)
         let x = CTChatTableViewCell.defaultHeight+CTChatTableViewCell.padding
         let width = frame.size.width-CTChatTableViewCell.padding-x
+        
+        self.thumbnail = UIImageView(frame: CGRect(x: 0, y: 0, width: CTChatTableViewCell.defaultHeight, height: CTChatTableViewCell.defaultHeight))
+        self.thumbnail.backgroundColor = UIColor(patternImage: UIImage(named: "pencil_icon.png")!)
+        self.contentView.addSubview(self.thumbnail)
         
         self.dateLabel = UILabel(frame: CGRect(x: x, y: y, width: width, height: 14))
         self.dateLabel.textAlignment = .Right

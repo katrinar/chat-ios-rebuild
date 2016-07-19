@@ -13,6 +13,7 @@
 		5418D13A1D11EF620064150D /* profile_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5418D1391D11EF620064150D /* profile_icon@2x.png */; };
 		9AB842EB0F823917C977963F /* Pods_chat_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED91D5B61F232243D60828B6 /* Pods_chat_ios.framework */; };
 		D32767FC1D3D5CAD002FD1DA /* pencil_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D32767FB1D3D5CAD002FD1DA /* pencil_icon@2x.png */; };
+		D32768001D3D6CBB002FD1DA /* camera_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D32767FF1D3D6CBB002FD1DA /* camera_icon@2x.png */; };
 		D3497AC81D32FF1C00DB49D9 /* CTChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3497AC71D32FF1C00DB49D9 /* CTChatTableViewCell.swift */; };
 		D3497ACA1D330FC200DB49D9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3497AC91D330FC200DB49D9 /* GoogleService-Info.plist */; };
 		D3497ACC1D3337A200DB49D9 /* CTPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3497ACB1D3337A200DB49D9 /* CTPost.swift */; };
@@ -41,6 +42,7 @@
 		5418D1391D11EF620064150D /* profile_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile_icon@2x.png"; sourceTree = "<group>"; };
 		942CC802F63FFD1B4DA33F26 /* Pods-chat-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chat-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chat-ios/Pods-chat-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		D32767FB1D3D5CAD002FD1DA /* pencil_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pencil_icon@2x.png"; sourceTree = "<group>"; };
+		D32767FF1D3D6CBB002FD1DA /* camera_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_icon@2x.png"; sourceTree = "<group>"; };
 		D3497AC71D32FF1C00DB49D9 /* CTChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTChatTableViewCell.swift; sourceTree = "<group>"; };
 		D3497AC91D330FC200DB49D9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D3497ACB1D3337A200DB49D9 /* CTPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTPost.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 			children = (
 				D32767FB1D3D5CAD002FD1DA /* pencil_icon@2x.png */,
 				5418D1371D11EDE20064150D /* globe_icon@2x.png */,
+				D32767FF1D3D6CBB002FD1DA /* camera_icon@2x.png */,
 				5418D1391D11EF620064150D /* profile_icon@2x.png */,
 			);
 			path = Images;
@@ -248,6 +251,7 @@
 			files = (
 				D32767FC1D3D5CAD002FD1DA /* pencil_icon@2x.png in Resources */,
 				5418D1381D11EDE20064150D /* globe_icon@2x.png in Resources */,
+				D32768001D3D6CBB002FD1DA /* camera_icon@2x.png in Resources */,
 				D3497ACA1D330FC200DB49D9 /* GoogleService-Info.plist in Resources */,
 				5418D13A1D11EF620064150D /* profile_icon@2x.png in Resources */,
 				54051CBC1D0A001200FE7E76 /* Assets.xcassets in Resources */,
